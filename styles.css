@@ -76,10 +76,15 @@ html {
     box-sizing: border-box;
 }
 
+.answer-container {
+    display: flex;
+    flex-direction: wrap;
+    gap: 10px;
+}
+
 .quiz-answer {
-    display: inline-block;
-    width: calc(50% - 10px);
-    height: 45px;
+    flex: 1 0 calc(50% - 10px);
+    min-height: 45px;
     background: transparent;
     border: 2px solid #aaa;
     padding: 10px;
@@ -87,6 +92,11 @@ html {
     margin-bottom: 10px;
     margin-right: 10px;
     outline: none;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .quiz-answer:nth-child(2n) {
@@ -112,7 +122,6 @@ button {
     background: #8749f2;
     color: #fff;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
     font-size: 15px;
     padding: 10px 20px;
     cursor: pointer;
@@ -120,6 +129,7 @@ button {
     font-weight: 500;
     transition: all 0.5s ease;
 }
+
 #quiz-display {
     display: flex;
     justify-content: center;
@@ -178,6 +188,10 @@ button {
     border: 2px solid #aaa;
     font-size: 13px;
     margin-right: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-y: hidden;
 }
 
 .option:nth-child(2n){
