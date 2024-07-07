@@ -10,12 +10,14 @@ function addQuestion() {
         <span class="question-number"></span>
         <textarea class="quiz-ques" placeholder="Question" required></textarea>
         <div class="answer-container">
-        <input type="text" class="quiz-answer" placeholder="Choice 1" required>
-        <input type="text" class="quiz-answer" placeholder="Choice 2" required>
-        <input type="text" class="quiz-answer" placeholder="Choice 3" required>
-        <input type="text" class="quiz-answer" placeholder="Choice 4" required>
-        <input type="text" class="quiz-correct-answer" placeholder="Correct Choice (1-4)" required>
+            <textarea class="quiz-answer" placeholder="Choice 1" required></textarea>
+            <textarea class="quiz-answer" placeholder="Choice 2" required></textarea>
         </div>
+        <div class="answer-container">
+            <textarea class="quiz-answer" placeholder="Choice 3" required></textarea>
+            <textarea class="quiz-answer" placeholder="Choice 4" required></textarea>
+        </div>
+        <input type="text" class="quiz-correct-answer" placeholder="Correct Choice (1-4)" required>
     `;
     document.getElementById('questions-container').appendChild(questionContainer);
 
@@ -25,11 +27,11 @@ function addQuestion() {
 
 function adjustTextareaHeight(textarea) {
     textarea.style.height = '';
-    textarea.style.height = (textarea.scrollHeight + 2 )+ 'px';
+    textarea.style.height = (textarea.scrollHeight + 2) + 'px';
 }
 
 function addTextareaAutoResize(textarea) {
-    textarea.addEventListener('input', function() {
+    textarea.addEventListener('input', function () {
         adjustTextareaHeight(this);
     });
 
@@ -37,27 +39,28 @@ function addTextareaAutoResize(textarea) {
 }
 
 document.querySelectorAll('.quiz-ques').forEach(textarea => {
-    textarea.addEventListener('input', function() {
-        adjustTextareaHeight(this);
-    });
     addTextareaAutoResize(textarea);
 });
 
+function removeQuestion() {
+    const questionsContainer = document.getElementById('questions-container');
+    if (questionsContainer.lastChild) {
+        questionsContainer.removeChild(questionsContainer.lastChild);
+    }
+    updateQuestionNumbers();
+}
 
 function createQuiz() {
     const title = document.getElementById('quiz-title').value;
     const questions = Array.from(document.getElementsByClassName('question-item')).map(item => {
         const questionTextarea = item.querySelector('.quiz-ques');
-        const inputs = item.getElementsByTagName('input');
+        const choiceTextareas = Array.from(item.querySelectorAll('.quiz-answer'));
+        const correctAnswerInput = item.querySelector('.quiz-correct-answer');
+
         return {
             question: questionTextarea.value,
-            choices: [
-                inputs[0].value,
-                inputs[1].value,
-                inputs[2].value,
-                inputs[3].value
-            ],
-            correct: inputs[4].value
+            choices: choiceTextareas.map(textarea => textarea.value),
+            correct: correctAnswerInput.value
         };
     });
 
