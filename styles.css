@@ -205,3 +205,26 @@ button {
     font-size: 25px;
     color: #444444;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 30px;
+    background: #fff;
+    padding-block: 10px;
+    z-index: 1000;
+}
+
+
+.bottom-footer {
+    font-size: 14px;
+    color: #242526;
+    margin: 0;
+
+}
